@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ block.super }} | Sign In
+{% endblock title %}
+
+{% block bodyContent %}
+    <div class="grid-75">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Login">
+        </form>
+    </div>
+{% endblock bodyContent %}

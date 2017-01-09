@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% load static from staticfiles %}
+
+{% block title %}{{ block.super }} | Edit Profile{% endblock title %}
+
+{% block bodyContent %}
+    <div class="grid-75">
+        <h1>Hello {{ user.first_name }}</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save Changes" class="button-primary">
+        </form>
+    </div>
+{% endblock bodyContent %}

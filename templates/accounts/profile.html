@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ block.super }} | {{ profile.user.first_name }} {{ profile.user.last_name }}
+{% endblock %}
+
+
+{% block bodyContent %}
+    <div class="grid-75">
+        <h1>{{ profile.user.first_name}}'s Profile</h1>
+        {% if profile.avatar %}
+            <div class="circle--primary--avatar">
+                <img src="{% static "" %}{{ profile.avatar }}"
+                     alt="{{ profile.user.first_name }} {{ profile.user.last_name }} Picture">
+            </div>
+        {% endif %}
+            <table class="circle--table">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                <tr>
+                    <td>{{ profile.user.first_name }}</td>
+                    <td>{{ profile.user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td>{{ profile.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Birthday</th>
+                </tr>
+                <tr>
+                    <td>{{ profile.date_of_birth|date:"j F"}}</td>
+                </tr>
+                <tr>
+                    <th>Biography</th>
+                </tr>
+                <tr>
+                    <td>{{ profile.biography }}</td>
+                </tr>
+            </table>
+        {% if privileged %}
+            <a href="{% url 'accounts:edit_profile' pk=user.pk %}">Edit</a>
+            <a href="{% url 'accounts:change_password' %}">Change Password</a>
+        {% endif %}
+    </div>
+{% endblock bodyContent %}

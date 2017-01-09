@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {% if user.is_authenticated %}
+        {{ block.super }} | Profiles
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock title %}
+
+{% block bodyContent %}
+    <div class="grid-25">
+    </div>
+    <div class="grid-75">
+        <h1>Welcome!</h1>
+        {% if user.is_authenticated %}
+            <h2>Here are our currently active user's</h2>
+            <hr>
+                <ul>
+                    {% for user in users %}
+                        <li>
+                            <a href="{% url 'accounts:profile' pk=user.user.pk %}">
+                                {{ user.user.first_name }} {{ user.user.last_name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+        {% else %}
+            <h2>Please log in to see our users</h2>
+        {% endif %}
+    </div>
+{% endblock bodyContent%}
